@@ -16,7 +16,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, children }) => {
   return (
     <button
       onClick={handleClick}
-      className="text-md font-semibold leading-6 text-black hover:text-[#F04D99]"
+      className="text-[15px] font-bold   rounded-full hover:bg-gray-300 px-2 py-[1px] focus:text-[black] focus:bg-white text-[#736d83] w-full hover:text-[#fff] "
     >
       {children}
     </button>

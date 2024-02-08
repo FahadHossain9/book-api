@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Navbar from "./components/NavBar/NavBar";
-// import About from "./components/About";
-// import Navbar from "./components/Navbar";
+import Articles from "./components/Articles/Articles";
+import BestSellerBooks from "./components/Books/Books";
 
 const App: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/books" element={<BestSellerBooks />} />
       </Routes>
     </Router>
   );

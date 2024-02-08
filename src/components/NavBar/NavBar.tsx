@@ -12,38 +12,45 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50 bg-white">
+    <header className="absolute inset-x-0 top-0 z-50 bg-[#F3FAFA]">
       <nav
-        className="flex items-center justify-between p-3 lg:px-8 max-w-[1440px] mx-auto"
+        className="flex items-center justify-between py-4 px-3 lg:px-8 max-w-[1440px] mx-auto"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1 items-center">
+        <div className="flex lg:flex items-center">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            {/* Insert your logo here */}
+            <img
+              src="/logo.png"
+              alt="logo of a books"
+              className="h-10 w-12  "
+            />
           </a>
         </div>
-        <div className="flex lg:hidden">
+        <div className="flex  lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#F04D99] bg-white"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon />
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12 items-center mr-16">
+        <div className="hidden  justify-center  bg-[#5c39a71a]  py-2 px-4 rounded-full  md:flex lg:gap-x-8 items-center mr-16">
           {navigation.map((item) => (
             <NavItem key={item.name} href={item.href}>
               {item.name}
             </NavItem>
           ))}
         </div>
+        <div>
+          <button>Sign Up</button>
+        </div>
       </nav>
       <Dialog
         as="div"
-        className="lg:hidden"
+        className="mg:hidden"
         open={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
       >
@@ -65,7 +72,7 @@ const Navbar: React.FC = () => {
           </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
+              <div className="space-y-2 flex  py-6">
                 {navigation.map((item) => (
                   <NavItem key={item.name} href={item.href}>
                     {item.name}
