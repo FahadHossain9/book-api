@@ -4,6 +4,7 @@ import { Spin, Table } from "antd";
 import dayjs from "dayjs";
 import ListSelect from "./ListSelect";
 import CustomDatePicker from "./CustomDatePicker";
+import Loader from "../Loader/Loader";
 
 interface Book {
   title: string;
@@ -15,11 +16,17 @@ interface Book {
 
 const columns = [
   {
+    title: "SL",
+    dataIndex: "sl",
+    key: "sl",
+    render: (text: string, record: any, index: number) => index + 1,
+  },
+  {
     title: "Image",
     dataIndex: "book_image",
     key: "book_image",
     render: (book_image: string) => (
-      <img src={book_image} alt="book cover" style={{ maxWidth: "100px" }} />
+      <img src={book_image} alt="book cover" style={{ maxWidth: "50px" }} />
     ),
   },
   {
@@ -37,7 +44,7 @@ const columns = [
     dataIndex: "amazon_product_url",
     key: "amazon_product_url",
     render: (amazon_product_url: string) => (
-      <a href={amazon_product_url}>Link</a>
+      <a href={amazon_product_url}>Buy Now</a>
     ),
   },
   {
@@ -59,6 +66,7 @@ const BestSellerBooks: React.FC = () => {
 
   useEffect(() => {
     const fetchLists = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/books/v3/lists/names.json?api-key=${process.env.REACT_APP_API_KEY}`
@@ -71,11 +79,12 @@ const BestSellerBooks: React.FC = () => {
           })
         );
         setDefaultList(listNames[0].list_name_encoded);
-        console.log(defaultList);
         setLists(listNames);
-        setSelectedList(listNames[0].list_name_encoded); // Select the first list by default
+        setSelectedList(listNames[0].list_name_encoded);
       } catch (error) {
         console.error("Error fetching lists:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -111,8 +120,15 @@ const BestSellerBooks: React.FC = () => {
     defaultPageSize: 10,
   };
 
+  if (loading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   return (
-    <div className="px-10">
+    <div className="px-10 min-w-[650px]">
       <Spin spinning={loading}>
         <div className="flex justify-end py-4 gap-4 items-center  ">
           <CustomDatePicker
@@ -125,10 +141,11 @@ const BestSellerBooks: React.FC = () => {
             onChange={handleListChange}
           />
           <button
-            className="py-1 px-2 bg-blue-400 rounded-md"
+            type="button"
+            className="inline-flex  items-center gap-x-2 rounded-md hover:cursor-pointer bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={fetchBooks}
           >
-            Fetch Books
+            {`Fetch Books`}
           </button>
         </div>
         <Table
