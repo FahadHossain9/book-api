@@ -12,7 +12,7 @@ const TabComponent: React.FC = () => {
     <div className="w-4/5 mx-auto px-2 py-10 sm:px-0">
       <Tab.Group>
         <div className="flex  justify-end">
-          <Tab.List className="flex w-1/3  bg-white rounded-xl  p-1">
+          <Tab.List className="flex w-full md:w-1/2 lg:w-1/3  bg-white rounded-xl  p-1">
             <Tab
               className={({ selected }) =>
                 `w-full rounded-lg py-2.5 text-sm p-2 font-medium leading-5  ring-offset-2  focus:outline-none  ${

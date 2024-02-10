@@ -128,9 +128,9 @@ const BestSellerBooks: React.FC = () => {
     );
   }
   return (
-    <div className="px-10 min-w-[650px]">
+    <div className="px-4 md:px-10 ">
       <Spin spinning={loading}>
-        <div className="flex justify-end py-4 gap-4 items-center  ">
+        <div className=" flex justify-end flex-wrap  py-4 gap-4 items-center  ">
           <CustomDatePicker
             defaultValue={dayjs()}
             onChange={handleDateChange}
