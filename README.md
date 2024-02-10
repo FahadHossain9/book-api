@@ -9,7 +9,7 @@ To run this project, you need to have the following software installed:
 - Node.js
 - Git
 
-To run this React application, follow these steps:
+###To run this React application, follow these steps:
 
 1. Clone the project repository: 
 
