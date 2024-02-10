@@ -1,8 +1,17 @@
-# Running the React Application
+## Getting Started
+
+These instructions will guide you on how to clone and set up the project locally on your machine.
+
+### Prerequisites
+
+To run this project, you need to have the following software installed:
+
+- Node.js
+- Git
 
 To run this React application, follow these steps:
 
-1. Clone the project repository:
+1. Clone the project repository: 
 
 2. Navigate to the project directory:
 
