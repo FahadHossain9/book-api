@@ -1,40 +1,15 @@
+# Running the React Application
 
-Here's the README.md file with the specified instructions:
+To run this React application, follow these steps:
 
-# Book API React Application
+1. Clone the project repository:
 
-Getting Started
-1. Prerequisites:
+2. Navigate to the project directory:
 
-Node.js and npm (or yarn) installed on your machine.
-2. Installation:
+3. Copy the .env.example file to .env:
 
-Clone the repository:
+4. Install the project dependencies:
 
-Bash
-git clone https://github.com/your-username/book-api.git
-Use code with caution. Learn more
-Navigate to the project directory:
+5. Start the development server:
 
-Bash
-cd book-api/
-Use code with caution. Learn more
-Create a .env file from the example:
-
-Bash
-cp .env.example .env
-Use code with caution. Learn more
-Install dependencies:
-
-Bash
-npm install
-Use code with caution. Learn more
-3. Running the application:
-
-Start the development server:
-
-Bash
-npm run start
-Use code with caution. Learn more
-Access the application in your browser, usually at http://localhost:3000.
-
+That's it! The React application should now be running locally on your machine.
