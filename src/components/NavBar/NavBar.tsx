@@ -1,13 +1,27 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const [activeMenu, setActiveMenu] = useState(() => {
+    // Initialize activeMenu from localStorage or default to "Articles"
+    return localStorage.getItem("activeMenu") || "Articles";
+  });
+
+  useEffect(() => {
+    // Update localStorage when activeMenu changes
+    localStorage.setItem("activeMenu", activeMenu);
+  }, [activeMenu]);
+
   const navigation = [
     { name: "Articles", href: "/" },
     { name: "Books", href: "/books" },
   ];
+
+  const handleMenuClick = (name: string) => {
+    setActiveMenu(name);
+  };
 
   return (
     <Disclosure as="nav" className="bg-white shadow">
@@ -17,20 +31,23 @@ const NavBar: React.FC = () => {
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link to="/">
-                    <img className="h-12 w-auto" src={"/logo.png"} alt="logo" />
-                  </Link>
+                  <img className="h-12 w-auto" src={"/logo.png"} alt="logo" />
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
-                    className="inline-flex font-semibold items-center border-b-2 border-transparent px-1 pt-1 text-sm  text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    to={item.href}
+                    onClick={() => handleMenuClick(item.name)}
+                    className={`inline-flex font-semibold items-center px-1 pt-1 text-sm text-gray-500 hover:text-gray-700 ${
+                      activeMenu === item.name
+                        ? "border-b-2 border-gray-500"
+                        : ""
+                    }`}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
 
@@ -52,14 +69,16 @@ const NavBar: React.FC = () => {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 pb-3 pt-2">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <Link
                   key={item.name}
-                  as="a"
-                  href={item.href}
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                  to={item.href}
+                  onClick={() => handleMenuClick(item.name)}
+                  className={`block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:text-gray-700 ${
+                    activeMenu === item.name ? "border-l-4 border-gray-500" : ""
+                  }`}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>

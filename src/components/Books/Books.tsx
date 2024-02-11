@@ -6,6 +6,8 @@ import ListSelect from "./ListSelect";
 import CustomDatePicker from "./CustomDatePicker";
 import Loader from "../Loader/Loader";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface Book {
   title: string;
   author: string;
@@ -81,8 +83,11 @@ const BestSellerBooks: React.FC = () => {
         setDefaultList(listNames[0].list_name_encoded);
         setLists(listNames);
         setSelectedList(listNames[0].list_name_encoded);
-      } catch (error) {
+
+        await fetchBooks(listNames[0].list_name_encoded);
+      } catch (error: any) {
         console.error("Error fetching lists:", error);
+        toast.error(error.response.statusText);
       } finally {
         setLoading(false);
       }
@@ -91,7 +96,7 @@ const BestSellerBooks: React.FC = () => {
     fetchLists();
   }, []);
 
-  const fetchBooks = async () => {
+  const fetchBooks = async (selectedList: string) => {
     setLoading(true);
     try {
       const response = await axios.get(
@@ -99,7 +104,7 @@ const BestSellerBooks: React.FC = () => {
       );
       const { books } = response.data.results;
       setBooks(books);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching books:", error);
     } finally {
       setLoading(false);
@@ -143,7 +148,7 @@ const BestSellerBooks: React.FC = () => {
           <button
             type="button"
             className="inline-flex  items-center gap-x-2 rounded-md hover:cursor-pointer bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={fetchBooks}
+            onClick={() => fetchBooks(selectedList)}
           >
             {`Fetch Books`}
           </button>
